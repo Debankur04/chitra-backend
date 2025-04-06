@@ -11,6 +11,6 @@ userRouter.post('/register', registeruser)
 //localhost:4000/api/user/login
 userRouter.post('/login',loginuser)
 
-userRouter.post('/credit',userAuth,userCredits)
+userRouter.get('/credit',userAuth,userCredits)
 
 module.exports = userRouter;

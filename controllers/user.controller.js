@@ -43,7 +43,7 @@ module.exports.loginuser = async(req,res)=>{
 
         if(isMatch){
 
-            const token = jwt.sign({id: user._id}, process.env.JWT_SECRET)
+            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
             res.json({success: true, token, user: {name: user.name}})
 
         }else{
@@ -58,7 +58,7 @@ module.exports.loginuser = async(req,res)=>{
 
 module.exports.userCredits = async (req,res) => {
     try {
-        const {userId} = req.body;
+        const userId = req.userId; // ✅ This works — set by the middleware
         const user = await userModel.findById(userId)
         res.json({success: true, credits: user.creditBalance, user: {name: user.name}})
     } catch (error) {
